@@ -16,8 +16,8 @@ ENV PORT=PORT_a
 
 RUN apt-get -y update \
  && apt-get -y install git \
- && apt-get -y install software-properties-common autoconf git build-essential libtool libprotobuf-c-dev libgmp-dev libsqlite3-dev python python3 zip jq libevent-dev pkg-config libssl-dev libcurl4-gnutls-dev cmake
-add-apt-repository ppa:bitcoin/bitcoin \
+ && apt-get -y install software-properties-common autoconf git build-essential libtool libprotobuf-c-dev libgmp-dev libsqlite3-dev python python3 zip jq libevent-dev pkg-config libssl-dev libcurl4-gnutls-dev cmake \
+ && add-apt-repository ppa:bitcoin/bitcoin \
  && apt-get -y update \
  && apt-get -y install software-properties-common \
  && add-apt-repository -y ppa:bitcoin/bitcoin \
@@ -39,15 +39,12 @@ RUN mkdir cd ~/ \
  && cd src \
  && make -j2 chipsd \
  && make chips-cli \
- && cp chips-cli /usr/bin \ # just need to get chips-cli to work from command line
+ && cp chips-cli /usr/bin \
+# just need to get chips-cli to work from command line
 # make -> will build everything, including QT wallet
  && sudo ldconfig /usr/local/lib # thanks smaragda!
 
-RUN wget bootstrap.tar.gz \ # To create and host somewhere
-
-/*
-./chipsd -addnode=5.9.253.195 &
-*/
+# ./chipsd -addnode=5.9.253.195 &
 
 RUN apt-get install bash && mkdir /root/.${FOLDER}
 
@@ -55,19 +52,14 @@ COPY ${BINARY}.conf /root/.${FOLDER}
 COPY entry.sh /root/coind
 RUN chmod +x /root/coind/entry.sh
 
-COPY blocknotify.sh /root/coind
-RUN chmod +x /root/coind/blocknotify.sh
-
-/*
-cd
-git clone https://github.com/jl777/lightning
-cd lightning
-make
-daemon/lightning-cli stop; lightningd/lightningd --log-level=debug &
-cd privatebet
-./m_bet
-./client or ./host
-*/
+# cd
+# git clone https://github.com/jl777/lightning
+# cd lightning
+# make
+# daemon/lightning-cli stop; lightningd/lightningd --log-level=debug &
+# cd privatebet
+# ./m_bet
+# ./client or ./host
 
 WORKDIR ~/
 
