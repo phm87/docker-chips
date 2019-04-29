@@ -15,7 +15,7 @@ ENV PORT=PORT_a
 #ENV STR_PORT=STR_PORT_A
 
 RUN apt-get -y update \
- && apt-get -y install git \
+ && apt-get -y install unzip wget \
  && apt-get -y install software-properties-common autoconf git build-essential libtool libprotobuf-c-dev libgmp-dev libsqlite3-dev python python3 zip jq libevent-dev pkg-config libssl-dev libcurl4-gnutls-dev cmake \
  && add-apt-repository ppa:bitcoin/bitcoin \
  && apt-get -y update \
@@ -24,14 +24,14 @@ RUN apt-get -y update \
  && apt-get -y update \
  && apt-get -y install libdb4.8-dev libdb4.8++-dev
 
-RUN mkdir cd ~/ \
- && wget https://dl.bintray.com/boostorg/release/1.64.0/source/boost_1_64_0.zip \
+RUN wget https://dl.bintray.com/boostorg/release/1.64.0/source/boost_1_64_0.zip \
  && unzip boost_1_64_0.zip \
  && cd boost_1_64_0 \
  && ./bootstrap.sh \
  && ./b2 \
- && ./b2 install \
- && cd ~/ \
+ && ./b2 install
+
+RUN cd ~/ \
  && git clone ${REPOSITORY} \
  && cd ~/chips3 \
  && ./autogen.sh \
@@ -42,7 +42,8 @@ RUN mkdir cd ~/ \
  && cp chips-cli /usr/bin \
 # just need to get chips-cli to work from command line
 # make -> will build everything, including QT wallet
- && sudo ldconfig /usr/local/lib # thanks smaragda!
+ && sudo ldconfig /usr/local/lib
+# thanks smaragda!
 
 # ./chipsd -addnode=5.9.253.195 &
 
