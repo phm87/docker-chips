@@ -1,9 +1,9 @@
 FROM ubuntu:16.04
 MAINTAINER phm87
-ARG REPOSITORY=clone https://github.com/jl777/chips3
+ARG REPOSITORY=https://github.com/jl777/chips3
 ARG BINARY=chips
 ARG FOLDER=chips
-ARG PORT_A=9322
+ARG PORT_A=57777
 #ARG STR_PORT_A=4233
 
 ENV user=user
@@ -32,7 +32,7 @@ RUN mkdir cd ~/ \
  && ./b2 \
  && ./b2 install \
  && cd ~/ \
- && git clone https://github.com/jl777/chips3 \
+ && git clone ${REPOSITORY} \
  && cd ~/chips3 \
  && ./autogen.sh \
  && ./configure --with-boost=/usr/local/ \
