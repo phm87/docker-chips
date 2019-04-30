@@ -1,14 +1,6 @@
 FROM ubuntu:16.04
 MAINTAINER phm87
 ARG REPOSITORY=https://github.com/jl777/chips3
-ARG BINARY=chips
-ARG FOLDER=chips
-ARG P2P_PORT_A=57777
-ARG RPC_PORT_A=12454
-
-ENV user=user
-ENV P2P_PORT=P2P_PORT_A
-ENV RPC_PORT=RPC_PORT_A
 
 RUN apt-get -y update \
  && apt-get -y install unzip wget \
@@ -43,7 +35,7 @@ RUN cd ~/ \
 
 # ./chipsd -addnode=5.9.253.195 &
 
-RUN apt-get install bash && mkdir /root/.${FOLDER}
+RUN apt-get install bash && mkdir /root/.chips
 
 COPY ${BINARY}.conf /root/.${FOLDER}
 COPY entry.sh /root/coind
@@ -62,4 +54,4 @@ WORKDIR ~/
 
 CMD ["bash", "entry.sh"]
 
-EXPOSE ${P2P_PORT} ${RPC_PORT}
+EXPOSE 12454 57777
