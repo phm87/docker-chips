@@ -3,28 +3,24 @@ MAINTAINER phm87
 ARG REPOSITORY=https://github.com/jl777/chips3
 ARG BINARY=chips
 ARG FOLDER=chips
-ARG PORT_A=57777
-#ARG STR_PORT_A=4233
+ARG P2P_PORT_A=57777
+ARG RPC_PORT_A=12454
 
 ENV user=user
-#ENV port=4233
-#ENV password=tu8tu5
-ENV coin_folder=coin_folder_a
-ENV coin_binary=coin_binary_a
-ENV PORT=PORT_a
-#ENV STR_PORT=STR_PORT_A
+ENV P2P_PORT=P2P_PORT_A
+ENV RPC_PORT=RPC_PORT_A
 
 RUN apt-get -y update \
  && apt-get -y install unzip wget \
  && apt-get -y install software-properties-common autoconf git build-essential libtool libprotobuf-c-dev libgmp-dev libsqlite3-dev python python3 zip jq libevent-dev pkg-config libssl-dev libcurl4-gnutls-dev cmake \
  && add-apt-repository ppa:bitcoin/bitcoin \
  && apt-get -y update \
- && apt-get -y install software-properties-common \
+ && apt-get -y install software-properties-common libbz2-dev libicu-dev g++ python-dev autotools-dev bsdmainutils \
  && add-apt-repository -y ppa:bitcoin/bitcoin \
  && apt-get -y update \
  && apt-get -y install libdb4.8-dev libdb4.8++-dev
 
-RUN wget https://dl.bintray.com/boostorg/release/1.64.0/source/boost_1_64_0.zip \
+RUN cd /home && wget https://dl.bintray.com/boostorg/release/1.64.0/source/boost_1_64_0.zip \
  && unzip boost_1_64_0.zip \
  && cd boost_1_64_0 \
  && ./bootstrap.sh \
@@ -66,4 +62,4 @@ WORKDIR ~/
 
 CMD ["bash", "entry.sh"]
 
-EXPOSE ${PORT} ${STR_PORT}
+EXPOSE ${P2P_PORT} ${RPC_PORT}
