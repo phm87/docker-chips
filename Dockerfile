@@ -7,6 +7,7 @@ RUN apt-get -y update \
  && apt-get -y install software-properties-common autoconf git build-essential libtool libprotobuf-c-dev libgmp-dev libsqlite3-dev python python3 zip jq libevent-dev pkg-config libssl-dev libcurl4-gnutls-dev cmake \
  && add-apt-repository ppa:bitcoin/bitcoin \
  && apt-get -y update \
+# some packages were required to build boost 1.64:
  && apt-get -y install software-properties-common libbz2-dev libicu-dev g++ python-dev autotools-dev bsdmainutils \
  && add-apt-repository -y ppa:bitcoin/bitcoin \
  && apt-get -y update \
@@ -33,12 +34,9 @@ RUN cd ~/ \
  && ldconfig /usr/local/lib
 # thanks smaragda!
 
-# ./chipsd -addnode=5.9.253.195 &
-
 RUN apt-get install bash && mkdir /root/.chips
 
-COPY ${BINARY}.conf /root/.${FOLDER}
-COPY entry.sh /root/coind
+COPY entry.sh /root/coind/entry.sh
 RUN chmod +x /root/coind/entry.sh
 
 # cd
@@ -50,7 +48,7 @@ RUN chmod +x /root/coind/entry.sh
 # ./m_bet
 # ./client or ./host
 
-WORKDIR ~/
+WORKDIR /root/chips3
 
 CMD ["bash", "entry.sh"]
 
