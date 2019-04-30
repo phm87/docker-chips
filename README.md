@@ -28,7 +28,10 @@ cd docker-chips
 docker build . -t chips
 ```
 Run a container:
+```shell
 sudo docker run -it <imagename>
-
+```
 Run a container in detached mode:
+```shell
 sudo docker run -itd <imagename>
+```
