@@ -38,7 +38,7 @@ RUN cd ~/ \
  && cp chips-cli /usr/bin \
 # just need to get chips-cli to work from command line
 # make -> will build everything, including QT wallet
- && sudo ldconfig /usr/local/lib
+ && ldconfig /usr/local/lib
 # thanks smaragda!
 
 # ./chipsd -addnode=5.9.253.195 &
