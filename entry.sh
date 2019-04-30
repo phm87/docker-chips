@@ -43,4 +43,4 @@ echo "****************************************************"
 echo "Running: chipsd ${args[@]}"
 echo "****************************************************"
 
-exec chipsd ${args[@]}
+exec ~/chips3/src/chipsd ${args[@]}
