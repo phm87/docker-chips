@@ -63,3 +63,10 @@ echo "Running: chipsd -reindex"
 echo "****************************************************"
 
 exec ~/chips3/src/chipsd -reindex
+
+sleep 5000
+
+IP="$(curl ifconfig.me)"
+ln_args=("--alias=friendlyalias --ipaddr=${IP}  --rgb=555555 --log-level=debug")
+screen -dmS lightningd lightningd ${ln_args[@]}
+
