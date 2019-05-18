@@ -34,7 +34,7 @@ RUN cd ~/ \
  && ldconfig /usr/local/lib
 # thanks smaragda!
 
-RUN apt-get install bash && mkdir /root/.chips
+RUN apt-get install bash && mkdir /root/.chips && mkdir /root/coind
 
 COPY entry.sh /root/coind/entry.sh
 RUN chmod +x /root/coind/entry.sh
@@ -48,7 +48,7 @@ RUN chmod +x /root/coind/entry.sh
 # ./m_bet
 # ./client or ./host
 
-WORKDIR /root/chips3
+WORKDIR /root/coind
 
 CMD ["bash", "entry.sh"]
 
