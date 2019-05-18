@@ -48,6 +48,12 @@ RUN chmod +x /root/coind/entry.sh
 # ./m_bet
 # ./client or ./host
 
+RUN git clone https://github.com/jl777/lightning && \
+  cd lightning && \
+  make && \
+  ln -sf /lightning/lightningd/lightningd /usr/local/bin/lightningd && \
+  ln -sf /lightning/cli/lightning-cli /usr/local/bin/lightning-cli
+
 WORKDIR /root/coind
 
 CMD ["bash", "entry.sh"]
