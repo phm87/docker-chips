@@ -20,6 +20,12 @@ sudo systemctl status docker
 ```
 Source : https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-16-04
 
+### Windows
+
+https://download.docker.com/win/stable/Docker%20for%20Windows%20Installer.exe
+
+Source : https://docs.docker.com/docker-for-windows/install/
+
 ## build and run this dockerfile:
 Build the image:
 ```shell
